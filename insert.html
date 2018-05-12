@@ -1,0 +1,68 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ $("#insert").click(function(){
+ var n1=$("#n1").val();
+ var n2=$("#n2").val();
+ var n3=$("#n3").val();
+ var r=$("#r").val();
+ var dataString="id="+id+"&n1="+n1+"&n2="+n2+"&n3="+n3+"&insert=";
+ if($.trim(n1).length>0 & $.trim(n2).length>0 & $.trim(n3).length>0)
+ {
+ $.ajax({
+ type: "POST",
+ url:"http://192.168.0.27/notaf/insert.php",
+ data: dataString,
+ crossDomain: true,
+ cache: false,
+ beforeSend: function(){ $("#insert").val('Connecting...');},
+ success: function(data){
+ if(data=="success")
+ {
+ alert("inserted");
+ $("#insert").val('submit');
+ }
+ else if(data=="error")
+ {
+ alert("error");
+ }
+ }
+ });
+ }return false;
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <h1 class="title">Insertar Notas</h1>
+ <a class="button button-clear" href="readjson.html">Consulta</a>
+ </div><br/><br/>
+ <div class="list">
+ <input type="hidden" id="id" value=""/>
+ <div class="item">
+ <label>Nota1</label>
+ <input type="text" id="n1" value=""/>
+ </div>
+ <div class="item">
+ <label>Nota2</label>
+ <input type="text" id="n2" value=""/>
+ </div>
+ <div class="item">
+ <label>Nota3</label>
+ <input type="text" id="n3" value=""/>
+ </div>
+  <div class="item">
+ <label>Resultado</label>
+ <input type="text" id="r" value=""/>
+ </div>
+ <div class="item">
+ <input type="button" id="insert" class="button button-block" value="Insert"/>
+ </div>
+ </div>
+</body>
+</html>

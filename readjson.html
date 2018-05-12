@@ -1,0 +1,34 @@
+<html>
+<head>
+ <link rel="stylesheet" type="text/css" href="css/ionic.css">
+ <script type="text/javascript" src="js/jquery.js"></script>
+ <script type="text/javascript">
+ $(document).ready(function()
+ {
+ var url="http://192.168.0.27/notaf/json.php";
+ $.getJSON(url,function(result){
+ console.log(result);
+ $.each(result, function(i, field){
+ var id=field.id;
+ var n1=field.n1;
+ var n2=field.n2;
+ var n3=field.n3;
+ var r=field.r;
+
+ $ resultado=(n1*0.35)+(n2*0.35)+(n3*0.30);
+
+ $("#listview").append("<a class='item' href='form.html?id="+id+"&n1="+n1+"&n2="+n2+"&n3="+n3+"'><span class='item-note'>$"+n3+"</span><h2>"+ n1 + " </h2><p>"+ n2 +"</p></a>");
+ });
+ });
+ });
+ </script>
+</head>
+<body>
+ <div class="bar bar-header bar-positive" style="margin-bottom:80px;">
+ <a href="index.html" class="button button-clear">Insertar Notas</a>
+ <h1 class="title">Consulta</h1>
+ </div><br/><br/>
+ <ul class="list" id="listview">
+ </ul>
+</body>
+</html>
